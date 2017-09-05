@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body{
+				width: 100%;
+				background: #eee;
+			}
+			ul li{
+				list-style: none;
+			}
+			.login_wrapper{
+				width: 1040px;
+				min-height: 900px;
+				margin: 0 auto;
+				position: relative;
+				overflow: hidden;
+			}
+			.login_header{
+				width:400px;
+				margin: 0 auto;
+			}
+			.loginlo{
+				font-size: 20px;
+  				color: gray;
+			}
+			.login_content{
+				position: absolute;
+				right:10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="login_wrapper">
+		    <div class="login_container" style="background: url(images/sign.jpg) no-repeat;">
+		        <div class="login_header">
+		        	<a href="#"><img src="images/logo.jpg"/></a>
+					<span class="loginlo">全球奢品&nbsp;&nbsp;正品保证</span>
+		        </div>
+		        <div class="login_content">
+		        <div class="login_main">
+		            <div class="hydl_regsiter">
+		                <h2>免费注册</h2>
+		                <span>已注册？<a href="login.html">登录</a></span>
+		            </div>
+		            	<div class="newPeople"><p><span style="color: rgb(255, 0, 0);">新客专享 1000元现金券礼包</span></p></div>
+		         <div class="hydl_loginbar">
+		         	<input type="hidden" value="regist" id="pages">
+		         	<input type="hidden" value="yes" name="isGetRemind">
+		            <ul>
+		                <li>
+		                    <span>账户名:</span><input style="width:253px;" name="userAccount" id="userAccount" type="text" value="手机号/邮箱" onblur="checkFormInfo('regist','yes','','','account')" onfocus="removeContent()" maxlength="64">
+		                    <p id="Act_error"></p>
+		                    <div id="EmailIsHad" class="hidstyle">
+		                    <p>该邮箱已存在，请更换其他手机号/邮箱或尝试<a href="http://www.mei.com/user/tologinpage">登录</a></p>
+		                    </div>
+		                    <div id="TelIsHad" class="hidstyle">
+		                    <p>该手机号已存在，请更换其他手机号/邮箱或尝试<a href="http://www.mei.com/user/tologinpage">登录</a></p>
+		                    </div>
+		                </li>
+		                <li>
+		                	<span>密码:</span><input style="width:253px;display:block;" name="passWordtext" id="passWordtext" type="text" value="请输入6-20个字符" onfocus="removePwdContent()" maxlength="20">
+		                	<input style="width:253px; display:none;" name="passWord" id="passWord" type="password" onblur="checkFormInfo('regist','no','','','pwd')" maxlength="20" onkeyup="pwStrength(this.value)">
+		                	<p id="Pwd_error"></p>
+		                	<p id="lowPwd"></p>
+		                    <div class="login_safety hidstyle" id="lowMHight">
+		                        <span id="low">低</span>
+		                        <span id="middle">中</span>
+		                        <span id="height">高</span>
+		                    </div>
+		                </li>
+		                <li><span>确认密码:</span><input style="width:253px;" name="rpassWord" type="password" onblur="checkFormInfo('regist','no','','','rpwd')" maxlength="20">
+		                	<p id="RPwd_error"></p>
+		                	<p id="switch_error"></p>
+		                </li>
+		                <li id="rdm_img" class="hidestyle showstyle"><span>验证码:</span>
+		                	<input class="yanzheng" name="random" id="randomImg" onkeyup="value=value.replace(/[^\w/]/ig,'')" maxlength="6" type="text" onblur="checkFormInfo('regist','no','','','random')">
+		                    <img id="rdm" src="/user/getRandom?0.4722132035049247" onclick="getResetRandom('',this)" style=" border: 1px solid #999;cursor: pointer;">
+		                	<p class="Rdm_error" id="Rdm_error"></p>
+		                </li>
+		                <li id="rdm_tel" class="showstyle"><span>短信验证码:</span><input class="yanzheng" onkeyup="value=value.replace(/[^\w/]/ig,'')" id="validateCode" name="random1" maxlength="5" type="text" onblur="checkFormInfo('regist','no','','','random1')">
+		                <a style="cursor: pointer;" onclick="sendMessageCode();" class="sendRandm"><img id="sendRandm" src="https://cdn11.mei.com/images/login/img_03.png"></a>
+		                <a style="cursor: pointer;" onclick="sendMessageCode();" class="rsendRandm hidstyle"><img id="rsendRandm" src="https://cdn11.mei.com/images/login/img_04.png"></a>
+		                <div class="ma hidstyle"><b class="times">60</b>秒后重新获取验证码</div>
+		                	<p class="Rdm_error" id="Rdm_error"></p>
+		                </li>
+		                <input type="hidden" value="yes" id="isGetRemind">
+		                <input type="hidden" value="" id="is_check_code_show_reg">
+		                <input type="hidden" value="1" id="is_reg">
+		            </ul>
+		            </div>
+		            <div style="clear:both;"></div>
+		            <div class="hydl_btn">
+		            	<a id="regist" style="cursor: pointer;">立即注册</a>
+		            </div>
+		            <div class="sjzc_login">
+		            	<p data-spm="2028709">点击立即注册即表示同意魅力惠<a href="http://www.mei.com/Hrbeforepage/USEGUIZE.html"><span>使用条款</span></a>
+		            	</p><p><span id="chooseRemind" class="selected chengepst">复选框</span>您将收到魅力惠每日最新上线邮件</p>
+		            </div>
+		            <div style="clear:both;"></div>
+		            <div class="xian"></div>
+		            <div class="erweima">
+		                <img src="images/sign-erweima.jpg">
+		              <p>扫描二维码或发送短信<br>“MLH”到“12114”<br>下载APP尊享独家优惠</p>
+		            </div>
+		          
+		         </div>  
+		                    
+		        </div>
+		         <div class="footer_advantage">
+		                <ul>
+		                <li><a class="a1">100%正品保证</a></li>
+		                    <li><a class="a2" href="#">满688免运费</a></li>
+		                    <li><a class="a3" href="#">7天无条件退货</a></li>
+		                    <li><a class="a4" href="#">超值折扣</a></li>
+		                    <li><a class="a5" href="#">9点限时闪购</a></li>
+		                    <li class="footer_advantage_right"><a class="a6" href="#">400-664-6698</a></li>
+		                </ul>
+		          </div>
+		          <p class="footer_copyright">COPYRIGHT©2016 杭州魅俪信息技术有限公司版权所有 &nbsp;&nbsp;&nbsp;&nbsp;浙ICP备16004860号-1</p>
+		    </div>
+		</div>
+	</body>
+</html>
