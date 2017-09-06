@@ -6,7 +6,30 @@ $("#header_wrap").load("public.html .header",function(){
 		$(this).next().hide()
 	})
 });
-$("#nav_wrap").load("public.html .nav");
+$("#nav_wrap").load("public.html .nav",function(){
+	/*$(".nav_left").on("click","li",function(){
+		$(this).addClass("nav-on").siblings().removeClass("nav-on");
+	})*/
+	$(".nav_left").on("mousemove","li",function(){
+		$(this).find($(".nav-mo")).show()
+	})
+	$(".nav_left").on("mouseout","li",function(){
+		$(this).find($(".nav-mo")).hide()
+	})
+	$(".nav_right").hover(function(){
+		$(".nav-car").show();
+	},function(){
+		$(".nav-car").hide();
+	})
+	$(window).scroll(function(){
+		var sTop=$(document).scrollTop();
+		if(sTop<120){
+			$(".nav").css("position","");
+		}else{
+			$(".nav").css({"position":"fixed","top":0,"z-index":999});
+		}
+	})
+});
 $("#returnTop_wrap").load("public.html .returnTop",function(){
 	$(window).scroll(function(){
 		var sTop=$(document).scrollTop();
@@ -17,9 +40,32 @@ $("#returnTop_wrap").load("public.html .returnTop",function(){
 			$(".clickOn").hide();
 		}
 		$(".clickOn").click(function(){
-			$("body,html").animate({"scrollTop":0},1000)
+			$("body,html").stop().animate({"scrollTop":0},1000)
 		})
 	})
 });
+$("#huodong_wrap").load("public.html .huodong",function(){
+	$(".huo-dd").hover(function(){
+		$(this).find($(".huo-dd-zhe")).show();
+		$(this).find($(".huo-dd-zi")).show();
+	},function(){
+		$(this).find($(".huo-dd-zhe")).hide();
+		$(this).find($(".huo-dd-zi")).hide();
+	})
+	$(".huo-u").on("click","li",function(){
+		$(this).addClass("huo-on").siblings().removeClass("huo-on");
+		$(".huo-d").eq($(this).index()).show().siblings().hide();
+	})
+});
 $("#footer_wrap").load("public.html .footer_advantage");
+//图片公共特效
+$(".img-t").hover(function(){
+	$(this).find($(".img-zhe")).show();
+	$(this).find($(".img-zi")).show();
+	$(this).find($(".img-m")).stop().animate({"left":-10,"top":-10,"width":340,"height":212,},500);
+},function(){
+	$(this).find($(".img-zhe")).hide();
+	$(this).find($(".img-zi")).hide();
+	$(this).find($(".img-m")).stop().animate({"left":0,"top":0,"width":320,"height":192,},500);
+})
 
