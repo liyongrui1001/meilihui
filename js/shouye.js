@@ -1,12 +1,20 @@
 /*公共部分*/
-$("#header_wrap").load("public.html .header",function(){
+$("#header_wrap").load("http://127.0.0.1/meilihui/public.html .header",function(){
 	$("#ph").hover(function(){
 		$(this).next().show()
 	},function(){
 		$(this).next().hide()
 	})
+	var uname=getCookie("username");
+	if(!(uname=="")){
+		$(".zhuce-a").html(uname);
+		$(".denglu-a").html("退出");
+	};
+	$(".denglu-a").click(function(){
+		location.href="http://127.0.0.1/meilihui/login.html";
+	})
 });
-$("#nav_wrap").load("public.html .nav",function(){
+$("#nav_wrap").load("http://127.0.0.1/meilihui/public.html .nav",function(){
 	/*$(".nav_left").on("click","li",function(){
 		$(this).addClass("nav-on").siblings().removeClass("nav-on");
 	})*/
@@ -30,7 +38,7 @@ $("#nav_wrap").load("public.html .nav",function(){
 		}
 	})
 });
-$("#returnTop_wrap").load("public.html .returnTop",function(){
+$("#returnTop_wrap").load("http://127.0.0.1/meilihui/public.html .returnTop",function(){
 	$(window).scroll(function(){
 		var sTop=$(document).scrollTop();
 		$(".returnTop").css("top",sTop+400)
@@ -44,7 +52,7 @@ $("#returnTop_wrap").load("public.html .returnTop",function(){
 		})
 	})
 });
-$("#huodong_wrap").load("public.html .huodong",function(){
+$("#huodong_wrap").load("http://127.0.0.1/meilihui/public.html .huodong",function(){
 	$(".huo-dd").hover(function(){
 		$(this).find($(".huo-dd-zhe")).show();
 		$(this).find($(".huo-dd-zi")).show();
@@ -57,7 +65,7 @@ $("#huodong_wrap").load("public.html .huodong",function(){
 		$(".huo-d").eq($(this).index()).show().siblings().hide();
 	})
 });
-$("#footer_wrap").load("public.html .footer_advantage");
+$("#footer_wrap").load("http://127.0.0.1/meilihui/public.html .footer_advantage");
 //图片公共特效
 $(".img-t").hover(function(){
 	$(this).find($(".img-zhe")).show();
