@@ -64,6 +64,50 @@ $("#huodong_wrap").load("http://127.0.0.1/meilihui/public.html .huodong",functio
 		$(this).addClass("huo-on").siblings().removeClass("huo-on");
 		$(".huo-d").eq($(this).index()).show().siblings().hide();
 	})
+	var now=new Date();
+	var week=now.getDay();
+	if(week==0){
+		$(".week2").html("周二");
+		$(".week3").html("周三");
+		$(".week4").html("周四");
+		$(".week5").html("周五");
+	}
+	if(week==1){
+		$(".week2").html("周三");
+		$(".week3").html("周四");
+		$(".week4").html("周五");
+		$(".week5").html("周六");
+	}
+	if(week==2){
+		$(".week2").html("周四");
+		$(".week3").html("周五");
+		$(".week4").html("周六");
+		$(".week5").html("周日");
+	}
+	if(week==3){
+		$(".week2").html("周五");
+		$(".week3").html("周六");
+		$(".week4").html("周日");
+		$(".week5").html("周一");
+	}
+	if(week==4){
+		$(".week2").html("周六");
+		$(".week3").html("周日");
+		$(".week4").html("周一");
+		$(".week5").html("周二");
+	}
+	if(week==5){
+		$(".week2").html("周日");
+		$(".week3").html("周一");
+		$(".week4").html("周二");
+		$(".week5").html("周三");
+	}
+	if(week==6){
+		$(".week2").html("周一");
+		$(".week3").html("周二");
+		$(".week4").html("周三");
+		$(".week5").html("周四");
+	}
 });
 $("#footer_wrap").load("http://127.0.0.1/meilihui/public.html .footer_advantage");
 //图片公共特效
