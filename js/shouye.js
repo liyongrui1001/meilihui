@@ -29,6 +29,54 @@ $("#nav_wrap").load("http://127.0.0.1/meilihui/public.html .nav",function(){
 	},function(){
 		$(".nav-car").hide();
 	})
+	$(".nav-car").hover(function(){
+		$(".nav-car").show();
+	},function(){
+		$(".nav-car").hide();
+	})
+	var _arr=getCookie("shoplist");
+	if(_arr.length==0){
+		$(".nav-car").html(`<p class="nav-cp">购物袋暂无商品</p>`);
+	}else{
+		
+		var st=`<div class="nav-cd">`;
+		var sum="";
+		var count="";
+		for(var i=0; i<_arr.length; i++){
+			st+=`<div class="nav-cdt">
+					<img src="images/${_arr[i].src}"  />
+					<div class="nav-cdtr">
+						<p class="nav-cdtrn">${_arr[i].name}</p>
+						<p class="nav-cdtry">${_arr[i].color}</p>
+						<span class="nav-cdtrnum">${_arr[i].count}</span>×
+						<span class="nav-cdtrnum">${_arr[i].price}</span>
+						<span data-id=${_arr[i].id}  data-name=${_arr[i].name} data-src=${_arr[i].src} data-color=${_arr[i].color} data-price=${_arr[i].price}   style="display:none"></span>
+						<a class="nav-cshan">删除</a>
+					</div>
+				</div>`;
+				count=Number(count)+Number(_arr[i].count);
+				sum=Number(sum+_arr[i].count*_arr[i].price);
+		}
+		st+=`<p class="nav-cdc">购物袋小计：￥<span class="nav-carsum">${sum}</span></p>
+				<div class="nav-cdd">
+					<input type="button" value="结算" class="nav-carjie" />	
+				</div>
+			</div>`;
+		$(".nav-car").html(st);
+		$(".nav-rs").html(count);
+		$(".nav-rp").html(sum);
+	}
+	$(".nav-cshan").click(function(){
+		$(this).parent().parent().remove();
+		var id=$(this).prev().data("id");
+		for(var i in _arr){
+			if(id==_arr[i].id){
+				_arr.splice(i,1);
+				
+				setCookie("shoplist",JSON.stringify(_arr));
+			}
+		}
+	})
 	$(window).scroll(function(){
 		var sTop=$(document).scrollTop();
 		if(sTop<120){

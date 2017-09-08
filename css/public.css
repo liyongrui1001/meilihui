@@ -150,10 +150,58 @@ img {
   width: 300px;
   min-height: 200px;
   background: #fff;
+  border: 1px black solid;
   position: absolute;
   right: 0;
   top: 45px;
   display: none;
+}
+.nav-car .nav-cp {
+  width: 300px;
+  text-align: center;
+}
+.nav-car .nav-cd {
+  padding: 20px;
+}
+.nav-car .nav-cd .nav-cdt {
+  overflow: hidden;
+  padding: 20px 0;
+  border-bottom: 1px black solid;
+}
+.nav-car .nav-cd .nav-cdt img {
+  width: 60px;
+  height: 80px;
+  display: block;
+  float: left;
+  border: 1px black solid;
+}
+.nav-car .nav-cd .nav-cdt .nav-cdtr {
+  float: left;
+  line-height: 20px;
+  padding-left: 10px;
+  font-size: 12px;
+}
+.nav-car .nav-cd .nav-cdt .nav-cshan {
+  display: block;
+  cursor: pointer;
+  text-align: right;
+}
+.nav-car .nav-cd .nav-cdt a:hover {
+  color: red;
+}
+.nav-car .nav-cd .nav-cdc {
+  text-align: right;
+}
+.nav-car .nav-cd .nav-cdd {
+  width: 100px;
+  margin: 0 auto;
+}
+.nav-car .nav-cd .nav-cdd .nav-carjie {
+  width: 100px;
+  height: 30px;
+  background: red;
+  color: white;
+  border: none;
 }
 /*返回顶部公共部分*/
 .returnTop {

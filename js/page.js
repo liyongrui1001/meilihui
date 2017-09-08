@@ -42,7 +42,6 @@
 				//console.log(res.list[i].id)
 				if(id==res.list[i].id){
 					var ch=res.list[i];
-					var st=(ch.name).substr(0,2);
 					var zhe=((ch.price/ch.yuan)*10).toFixed(1);
 					str=`<p class="shop-top">
 							<a href="http://127.0.0.1/meilihui/index.html">首页</a>&ensp;&gt;&ensp;
@@ -79,7 +78,7 @@
 									<p>满688元全场免运</p>
 								</div>
 								<div class="shop-xuan">
-									<p>颜色：<span class="shop-xt">${st}</span></p>
+									<p>颜色：<span class="shop-xt">${ch.color}</span></p>
 									<img src="images/d${ch.src}" style="width: 75px; height: 100px;"/>
 									<p>数量</p>
 									<div class="shop-num">
@@ -93,6 +92,7 @@
 									</div>
 									<div class="shop-btn">
 										<input type="button" value="加入购物袋" class="shop-gou" />
+										<span data-id=${ch.id}  data-name=${ch.name} data-src=${ch.src} data-color=${ch.color} data-price=${ch.price}   style="display:none"></span>
 										<input type="button" value="立即购买" class="shop-mai" />
 									</div>
 									<div class="shop-dao">
@@ -149,6 +149,86 @@
 					index=2;
 				}
 				$(".shop-tul").find("img").eq(index).show().siblings().hide();
+			})
+			var st="";
+			$(".shop-gou").click(function(){
+				
+				var shopcount=$(".shop-number").val();
+				var arr = [];
+				var flag = true;//可以向数组中添加数据
+				var _json = {
+					id:$(this).next().data("id"),
+					name:$(this).next().data("name"),
+					src:$(this).next().data("src"),
+					price:$(this).next().data("price"),
+					price:$(this).next().data("price"),
+					color:$(this).next().data("color"),
+					count:shopcount
+				}
+				//当再次点击按钮时，cookie信息被覆盖  解决 ： 先取出cookie数据 存入到数组中，然后在把新增的商品存入到数组中
+				var cookieInfo = getCookie("shoplist");
+				if( cookieInfo.length != 0 ){//表示cookie中有数据
+					arr = cookieInfo;
+					//点击相同商品时，需要做商品数量的累加    用当前点击的商品编号id   和  取出来的cookie的 数据中商品id做比较 发现有相等的，count++
+					for(var i in arr){
+						if(_json.id == arr[i].id){
+							arr[i].count=Number(arr[i].count)+Number(shopcount);
+							flag = false;
+							break;
+						}
+					}
+					
+				}
+				
+				
+				if(flag){
+					arr.push(_json);
+				}
+				
+				setCookie("shoplist",JSON.stringify(arr));
+				/*var f = confirm("是否继续购买?确定--继续购买，取消---去购物车结算");
+				if( !f ){
+					location.href = "http://127.0.0.1/meilihui/shopcar.html";
+				}*/
+				st=`<div class="nav-cd">`;
+				
+				var sum="";
+				var count="";
+				for(var i in arr){
+					st+=`<div class="nav-cdt">
+							<img src="images/${arr[i].src}"  />
+							<div class="nav-cdtr">
+								<p class="nav-cdtrn">${arr[i].name}</p>
+								<p class="nav-cdtry">${arr[i].color}</p>
+								<span class="nav-cdtrnum">${arr[i].count}</span>×
+								<span class="nav-cdtrnum">${arr[i].price}</span>
+								<a class="nav-cshan">删除</a>
+							</div>
+						</div>`;
+						count=Number(count)+Number(arr[i].count);
+						sum=Number(sum+arr[i].count*arr[i].price);
+				}
+				st+=`<p class="nav-cdc">购物袋小计：￥<span class="nav-carsum">${sum}</span></p>
+						<div class="nav-cdd">
+							<input type="button" value="结算" class="nav-carjie" />	
+						</div>
+					</div>`;
+				$(".nav-car").html(st)
+				$(".nav-rs").html(count);
+				$(".nav-rp").html(sum);
+				console.log( document.cookie );
+				$(".nav-car").show("fast",function(){
+					/*var timer=setTimeout(function(){
+						$(".nav-car").hide();
+					},2000)
+					$(".nav-car").hover(function(){
+						clearTimeout(timer);
+					},function(){
+						setTimeout(function(){
+							$(".nav-car").hide();
+						},2000)
+					})*/
+				});
 			})
 		}
 	});
