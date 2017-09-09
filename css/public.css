@@ -206,7 +206,7 @@ img {
 /*返回顶部公共部分*/
 .returnTop {
   width: 100px;
-  height: 290px;
+  min-height: 200px;
   background: white;
   position: absolute;
   top: 400px;

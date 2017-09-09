@@ -5,7 +5,7 @@ $(".car-bt").on("click","li",function(){
 $(function(){
 	var arr=getCookie("shoplist");
 	if(arr.length==0){
-		$(".car-bb").html(`<p class="car-bbp">您还没有可购买的商品，赶快将心仪的商品加入购物袋吧~</p>`);
+		$(".car-bb").eq(0).html(`<p class="car-bbp">您还没有可购买的商品，赶快将心仪的商品加入购物袋吧~</p>`);
 	}else{
 		var str=`<div class="car-bbt">
 					<p>
@@ -48,10 +48,10 @@ $(function(){
 				</p>
 				<p class="car-bbcbr">
 					总价：（不含运费）：<span class="car-bbcnum">￥<span class="car-price">0.00</span></span>
-					<input type="button" value="结算" class="car-bbjie" />
+					<a><input type="button" value="结算" class="car-bbjie" /></a>
 				</p>
 			</div>`;
-		$(".car-bb").html(str);
+		$(".car-bb").eq(0).html(str);
 	}
 	//结算
 	function jiesuan(){
@@ -60,12 +60,12 @@ $(function(){
 		$(".check:checked").each(function(){
 			shopcount = shopcount + parseInt( $(this).parent().parent().find(".car-number").val() )
 			money += parseInt( $(this).parent().parent().find(".car-pr").html() )
-			alert($(".check:checked").length)
 		})
 		$(".car-bbnum").html( shopcount );
 		$(".car-price").html( money );
+		$(".nav-rs").html(shopcount);
+		$(".nav-rp").html(money);
 	}
-	jiesuan()
 	//点击复选框 结算
 	$(".check").click(function(){
 		jiesuan();
@@ -88,16 +88,31 @@ $(function(){
 	})
 	//删除
 	$(".car-bbshan").click(function(){
-		var id=$(this).parent().next().data("id");
-		$(this).parent().parent().remove();
-		for(var i in arr){
-			if(id==arr[i].id){
-				arr.splice(i,1);
-				setCookie("shoplist",JSON.stringify(arr));
+		var c=confirm("确定要删除吗？");
+		if(c){
+			var id=$(this).parent().next().data("id");
+			$(this).parent().parent().remove();
+			for(var i in arr){
+				if(id==arr[i].id){
+					arr.splice(i,1);
+					setCookie("shoplist",JSON.stringify(arr));
+				}
+			}
+			jiesuan();
+			jisuan();
+		}
+	})
+	$(".car-bbcshan").click(function(){
+		var c=confirm("确定要全部删除吗？");
+		if(c){
+			if($(".qx").prop("checked")){
+				$(this).parent().parent().parent().find(".car-bbc").remove();
+				arr.splice(0,arr.length);
+				removeCookie("shoplist");
+				jiesuan();
+				jisuan();
 			}
 		}
-		jiesuan();
-		jisuan();
 	})
 	//加减操作
 	$(".car-ji").click(function(){
@@ -124,9 +139,25 @@ $(function(){
 	function jisuan(){
 		var pr=688-$(".car-price").html();
 		if(pr>0){
-			$(".car-ccs").html(pr);
+			$(".car-cc").html(`再购<span class="car-ccs">${pr}</span>元立享满688元免运费	<a href="http://127.0.0.1/meilihui/list.html" style="text-decoration: underline;">去凑单&gt;</a>`);
 		}else{
 			$(".car-cc").html(`免运费&ensp;&ensp;<a href="http://127.0.0.1/meilihui/list.html">再逛逛&gt;</a>`);
 		}
 	}
+	$(".car-bbjie").click(function(){
+		var crr = [];
+		$(".check:checked").each(function(){
+			var bjson = {
+				id:$(this).parent().parent().find(".car-sp").data("id"),
+				name:$(this).parent().parent().find(".car-sp").data("name"),
+				src:$(this).parent().parent().find(".car-sp").data("src"),
+				price:$(this).parent().parent().find(".car-sp").data("price"),
+				color:$(this).parent().parent().find(".car-sp").data("color"),
+				count:$(this).parent().parent().find(".car-number").val()
+			}
+			crr.push(bjson);
+		})
+		setCookie("shopli",JSON.stringify(crr));
+		location.href="http://127.0.0.1/meilihui/pay.html";
+	})
 })

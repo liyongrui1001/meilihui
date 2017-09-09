@@ -62,18 +62,31 @@ $("#nav_wrap").load("http://127.0.0.1/meilihui/public.html .nav",function(){
 					<input type="button" value="结算" class="nav-carjie" />	
 				</div>
 			</div>`;
+			
 		$(".nav-car").html(st);
 		$(".nav-rs").html(count);
 		$(".nav-rp").html(sum);
 	}
+	$(".nav-carjie").click(function(){
+		location.href="http://127.0.0.1/meilihui/pay.html";
+	})
 	$(".nav-cshan").click(function(){
-		$(this).parent().parent().remove();
-		var id=$(this).prev().data("id");
-		for(var i in _arr){
-			if(id==_arr[i].id){
-				_arr.splice(i,1);
-				
-				setCookie("shoplist",JSON.stringify(_arr));
+		var c=confirm("确定要删除吗？")
+		if(c){
+			$(this).parent().parent().remove();
+			var id=$(this).prev().data("id");
+			for(var i in _arr){
+				if(id==_arr[i].id){
+					_arr.splice(i,1);
+					if(_arr.length==0){
+						$(".nav-car").html(`<p class="nav-cp">购物袋暂无商品</p>`);
+						$(".nav-rs").html(0);
+						$(".nav-rp").html(0);
+					}
+					$(".nav-rs").html(count);
+					$(".nav-rp").html(sum);
+					setCookie("shoplist",JSON.stringify(_arr));
+				}
 			}
 		}
 	})
@@ -90,13 +103,13 @@ $("#returnTop_wrap").load("http://127.0.0.1/meilihui/public.html .returnTop",fun
 	$(window).scroll(function(){
 		var sTop=$(document).scrollTop();
 		$(".returnTop").css("top",sTop+400)
-		if(sTop>200){
+		if(sTop>500){
 			$(".clickOn").show();
 		}else{
 			$(".clickOn").hide();
 		}
 		$(".clickOn").click(function(){
-			$("body,html").stop().animate({"scrollTop":0},1000)
+			$("body,html").stop().animate({"scrollTop":0})
 		})
 	})
 });

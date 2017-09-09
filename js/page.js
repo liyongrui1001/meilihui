@@ -150,6 +150,21 @@
 				}
 				$(".shop-tul").find("img").eq(index).show().siblings().hide();
 			})
+			$(".shop-mai").click(function(){
+				var shopcount=$(".shop-number").val();
+				var brr = [];
+				var ajson = {
+					id:$(this).prev().data("id"),
+					name:$(this).prev().data("name"),
+					src:$(this).prev().data("src"),
+					price:$(this).prev().data("price"),
+					color:$(this).prev().data("color"),
+					count:shopcount
+				}
+				brr.push(ajson);
+				setCookie("shopli",JSON.stringify(brr));
+				location.href="http://127.0.0.1/meilihui/pay.html";
+			})
 			var st="";
 			$(".shop-gou").click(function(){
 				
@@ -216,7 +231,7 @@
 				$(".nav-car").html(st)
 				$(".nav-rs").html(count);
 				$(".nav-rp").html(sum);
-				console.log( document.cookie );
+				//console.log( document.cookie );
 				$(".nav-car").show("fast",function(){
 					/*var timer=setTimeout(function(){
 						$(".nav-car").hide();
