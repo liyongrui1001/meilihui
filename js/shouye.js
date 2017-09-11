@@ -5,10 +5,16 @@ $("#header_wrap").load("http://127.0.0.1/meilihui/public.html .header",function(
 	},function(){
 		$(this).next().hide()
 	})
+	$(".zhuce-a").click(function(){
+			location.href="http://127.0.0.1/meilihui/sign.html";
+		})
 	var uname=getCookie("username");
 	if(!(uname=="")){
 		$(".zhuce-a").html(uname);
 		$(".denglu-a").html("退出");
+		$(".zhuce-a").click(function(){
+			location.href="http://127.0.0.1/meilihui/account.html";
+		})
 	};
 	$(".denglu-a").click(function(){
 		location.href="http://127.0.0.1/meilihui/login.html";
@@ -49,8 +55,8 @@ $("#nav_wrap").load("http://127.0.0.1/meilihui/public.html .nav",function(){
 						<p class="nav-cdtrn">${_arr[i].name}</p>
 						<p class="nav-cdtry">${_arr[i].color}</p>
 						<span class="nav-cdtrnum">${_arr[i].count}</span>×
-						<span class="nav-cdtrnum">${_arr[i].price}</span>
-						<span data-id=${_arr[i].id}  data-name=${_arr[i].name} data-src=${_arr[i].src} data-color=${_arr[i].color} data-price=${_arr[i].price}   style="display:none"></span>
+						<span class="nav-cdtrpri">${_arr[i].price}</span>
+						<span data-id=${_arr[i].id}  data-name=${_arr[i].name} data-src=${_arr[i].src} data-color=${_arr[i].color} data-price=${_arr[i].price}   style="display:none" class="nav-s"></span>
 						<a class="nav-cshan">删除</a>
 					</div>
 				</div>`;
@@ -68,6 +74,19 @@ $("#nav_wrap").load("http://127.0.0.1/meilihui/public.html .nav",function(){
 		$(".nav-rp").html(sum);
 	}
 	$(".nav-carjie").click(function(){
+		var crr = [];
+		$(".nav-cdt").each(function(){
+			var bjson = {
+				id:$(this).parent().parent().find(".nav-s").eq($(this).index()).data("id"),
+				name:$(this).parent().parent().find(".nav-s").eq($(this).index()).data("name"),
+				src:$(this).parent().parent().find(".nav-s").eq($(this).index()).data("src"),
+				price:$(this).parent().parent().find(".nav-s").eq($(this).index()).data("price"),
+				color:$(this).parent().parent().find(".nav-s").eq($(this).index()).data("color"),
+				count:$(this).parent().parent().find(".nav-cdtrnum").eq($(this).index()).html()
+			}
+			crr.push(bjson);
+		})
+		setCookie("shopli",JSON.stringify(crr));
 		location.href="http://127.0.0.1/meilihui/pay.html";
 	})
 	$(".nav-cshan").click(function(){

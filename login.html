@@ -59,30 +59,32 @@
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/cookie.js"></script>
 <script type="text/javascript">
-	var flagName="";
+	var flagname="";
 	$("#uname").blur(function(){
 		var uname=getCookie("username");
 		if($(this).val()==uname){
 			$("#login-s1").html("");
-			flagName=true;
+			flagname=true;
 		}else{
 			$("#login-s1").html("用户名不存在，去注册一个吧！");
-			flagName=false;
+			flagname=false;
 		}
 	})
-	var flagPwd="";
+	var flagpwd="";
 	$("#upwd").blur(function(){
 		var upwd=getCookie("userpwd");
 		if($(this).val()==upwd){
 			$("#login-s2").html("");
-			flagPwd=true;
+			flagpwd=true;
 		}else{
 			$("#login-s2").html("密码错误");
-			flagPwd=false;
+			flagpwd=false;
 		}
 	})
 	$("#sign-btn").click(function(){
-		alert("登录成功");
-		location.href="http://127.0.0.1/meilihui/index.html";
+		if(flagname&&flagpwd){
+			alert("登录成功");
+			location.href="http://127.0.0.1/meilihui/index.html";
+		}
 	})
 </script>

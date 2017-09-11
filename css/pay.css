@@ -32,6 +32,42 @@
   color: white;
   margin-left: 70px;
 }
+.pay-top .addres {
+  width: 300px;
+  min-height: 100px;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px gray solid;
+  box-shadow: 5px 5px 5px #eee;
+}
+.pay-top .addres p {
+  margin-top: 5px;
+}
+.pay-top .addres .add-top {
+  display: flex;
+  justify-content: space-between;
+}
+.pay-top .addres .add-top a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.pay-top .addres .add-top span {
+  font-size: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.pay-top .add-new {
+  display: block;
+  width: 150px;
+  height: 40px;
+  font-size: 20px;
+  background: red;
+  color: white;
+  line-height: 40px;
+  text-align: center;
+  margin-top: 20px;
+  cursor: pointer;
+}
 .pay-center {
   width: 1040px;
   margin: 0 auto;
@@ -153,4 +189,5 @@
   text-align: center;
   line-height: 40px;
   margin-top: 20px;
+  cursor: pointer;
 }

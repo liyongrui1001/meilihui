@@ -15,23 +15,36 @@
 		<div class="pay-top">
 			<h1>确认订单信息</h1>
 			<h3>收货地址</h3>
-			<p style="margin-top: 30px; padding-bottom: 20px;">使用新地址</p>
-			<p class="dizhi">&ensp;&ensp;收货人：<input type="text" /></p>
-			<p class="dizhi">手机号码：<input type="text" /></p>
-			<p class="dizhi">手机号码：
-				<select>
-					<option>请选择省</option>
-				</select>
-				<select>
-					<option>请选择市</option>
-				</select>
-				<select>
-					<option>请选择县</option>
-				</select>
-			</p>
-			<p class="dizhi">详细地址：<input type="text" /></p>
-			<p class="dizhi">邮政编码：<input type="text" />&ensp;&ensp;错误的邮编可能导致派送延迟或无法送达，请谨慎填写</p>
-			<p><input type="button" value="送到该地址"  class="pay-ti"/></p>
+			<div class="add">
+				<p style="margin-top: 30px; padding-bottom: 20px;">使用新地址</p>
+				<p class="dizhi">&ensp;&ensp;收货人：<input type="text" class="name" /></p>
+				<p class="dizhi">手机号码：<input type="text" class="phone" /></p>
+				<p class="dizhi">所在地区：
+					<select class="prov">
+						<option>请选择省</option>
+					</select>
+					<select class="city">
+						<option>请选择市</option>
+					</select>
+					<select class="country">
+						<option>请选择县</option>
+					</select>
+				</p>
+				<p class="dizhi">详细地址：<input type="text" class="add-xiang" /></p>
+				<p class="dizhi">邮政编码：<input type="text" class="add-you" />&ensp;&ensp;错误的邮编可能导致派送延迟或无法送达，请谨慎填写</p>
+				<p><input type="button" value="送到该地址"  class="pay-ti"/></p>
+				<!--<div class="addres">
+					<div class="add-top">
+						<p>默认地址</p>
+						<p><a>编辑</a><span>×</span></p>
+					</div>
+					<p><span class="add-name">李</span><span class="add-ph">123</span></p>
+					<p><span class="add-prov">1</span><span class="add-city">2</span><span class="add-country">3</span><span class="add-add">4</span></p>
+					<p class="add-num">111</p>
+					<p style="text-align: right;"><input type="checkbox" checked /></p>
+				</div>
+				<span class="add-new">使用新地址</span>-->
+			</div>
 		</div>
 		<div class="pay-center">
 			<h3>支付方式</h3>
@@ -55,7 +68,7 @@
 					<span class="pay-ppl1">品牌直发</span>
 					<img src="images/icon_countdown.gif"  />
 					<span class="pay-ppl2">预计送达日期：</span>
-					2017年09月14日
+					2017年09月<span class="pay-date">14</span>日
 				</p>
 				<p>单价</p>
 				<p>数量</p>
