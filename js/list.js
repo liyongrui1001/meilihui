@@ -25,12 +25,22 @@ function lxfEndtime(){
     setTimeout("lxfEndtime()",1000);
 };
 
-
+window.onload=function(){
+	var data={
+		arr:[]
+	}
+	ajaxGet("http://127.0.0.1/meilihui/json/data.json",function(res){
+		var arr=JSON.parse(res).list;
+		data.arr=arr;
+		var html=template("list",data);
+		$(".list-main").html(html);
+	})
+}
 
 //加载json数据
 $(function(){
 	lxfEndtime(); //倒计时
-	$.ajax({
+	/*$.ajax({
 		type:"get",
 		url:"http://127.0.0.1/meilihui/json/data.json",
 		success:function(res){
@@ -59,7 +69,7 @@ $(function(){
 			}
 			$(".list-main").html(html);
 		}
-	});
+	});*/
 	//商品图片鼠标移入效果
 	$(".list-main").on("mouseenter","a",function(){
 		$(this).next().show();

@@ -8,6 +8,29 @@
 		<script src="js/jquery-1.11.1.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/public.css" />
 		<link rel="stylesheet" type="text/css" href="css/list.css" />
+		<script src="js/template.js"></script>
+		<script src="js/ajax.js"></script>
+		<script type="text/html" id="list">
+			{{each arr as value i}}
+				<div class="shop-box">
+					<div class="shop-tui">买手推荐</div>
+					<a href="http://127.0.0.1/meilihui/page.html?id={{arr[i].id}}"><img src="images/{{arr[i].src}}"  class="shop-img" /></a>
+					<ul class="shop-small">
+						<li><img src="images/d{{arr[i].src}}"/></li>
+						<li><img src="images/e{{arr[i].src}}"/></li>
+						<li><img src="images/f{{arr[i].src}}"/></li>
+					</ul>
+					<div class="shop-b">
+						<p>LA CHANSON</p>
+						<p>{{arr[i].name}}</p>
+						<p>
+	                    	<span style="color: red;">￥{{arr[i].price}}</span>
+	                    	<span style="text-decoration: line-through; font-size:12px;">￥{{arr[i].yuan}}</span>
+	                    </p>
+					</div>
+				</div>
+			{{/each}}
+		</script>
 	</head>
 	<body>
 		<div id="header_wrap"></div>
