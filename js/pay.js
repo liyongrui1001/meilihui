@@ -108,14 +108,14 @@ $(function(){
 	$(".pay-sum").html(`￥${sum}.00`);
 	/*$.ajax({
 		type:"get",
-		url:"http://127.0.0.1/meilihui/json/data.json",
+		url:"json/data.json",
 		success:function(res){
 		
 		}
 	});*/
 	$(".pay-btn").click(function(){
 		setCookie("money",JSON.stringify($(".pay-sum").html()));
-		location.href="http://127.0.0.1/meilihui/payment.html";
+		location.href="payment.html";
 	})
 	var now=new Date();
 	var day=now.getDate();

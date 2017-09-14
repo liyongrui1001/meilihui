@@ -29,7 +29,7 @@ window.onload=function(){
 	var data={
 		arr:[]
 	}
-	ajaxGet("http://127.0.0.1/meilihui/json/data.json",function(res){
+	ajaxGet("json/data.json",function(res){
 		var arr=JSON.parse(res).list;
 		data.arr=arr;
 		var html=template("list",data);
@@ -42,7 +42,7 @@ $(function(){
 	lxfEndtime(); //倒计时
 	/*$.ajax({
 		type:"get",
-		url:"http://127.0.0.1/meilihui/json/data.json",
+		url:"json/data.json",
 		success:function(res){
 			var html="";
 			for(var i in res){
@@ -50,7 +50,7 @@ $(function(){
 					var ch=res[i][j];
 					html+=`<div class="shop-box">
 							<div class="shop-tui">买手推荐</div>
-							<a href="http://127.0.0.1/meilihui/page.html?id=${ch.id}"><img src="images/${ch.src}"  class="shop-img" /></a>
+							<a href="page.html?id=${ch.id}"><img src="images/${ch.src}"  class="shop-img" /></a>
 							<ul class="shop-small">
 								<li><img src="images/d${ch.src}"/></li>
 								<li><img src="images/e${ch.src}"/></li>

@@ -1,26 +1,26 @@
 /*公共部分*/
-$("#header_wrap").load("http://127.0.0.1/meilihui/public.html .header",function(){
+$("#header_wrap").load("public.html .header",function(){
 	$("#ph").hover(function(){
 		$(this).next().show()
 	},function(){
 		$(this).next().hide()
 	})
 	$(".zhuce-a").click(function(){
-			location.href="http://127.0.0.1/meilihui/sign.html";
+			location.href="sign.html";
 		})
 	var uname=getCookie("username");
 	if(!(uname=="")){
 		$(".zhuce-a").html(uname);
 		$(".denglu-a").html("退出");
 		$(".zhuce-a").click(function(){
-			location.href="http://127.0.0.1/meilihui/account.html";
+			location.href="account.html";
 		})
 	};
 	$(".denglu-a").click(function(){
-		location.href="http://127.0.0.1/meilihui/login.html";
+		location.href="login.html";
 	})
 });
-$("#nav_wrap").load("http://127.0.0.1/meilihui/public.html .nav",function(){
+$("#nav_wrap").load("public.html .nav",function(){
 	/*$(".nav_left").on("click","li",function(){
 		$(this).addClass("nav-on").siblings().removeClass("nav-on");
 	})*/
@@ -87,7 +87,7 @@ $("#nav_wrap").load("http://127.0.0.1/meilihui/public.html .nav",function(){
 			crr.push(bjson);
 		})
 		setCookie("shopli",JSON.stringify(crr));
-		location.href="http://127.0.0.1/meilihui/pay.html";
+		location.href="pay.html";
 	})
 	$(".nav-cshan").click(function(){
 		var c=confirm("确定要删除吗？")
@@ -118,7 +118,7 @@ $("#nav_wrap").load("http://127.0.0.1/meilihui/public.html .nav",function(){
 		}
 	})
 });
-$("#returnTop_wrap").load("http://127.0.0.1/meilihui/public.html .returnTop",function(){
+$("#returnTop_wrap").load("public.html .returnTop",function(){
 	$(window).scroll(function(){
 		var sTop=$(document).scrollTop();
 		$(".returnTop").css("top",sTop+400)
@@ -132,7 +132,7 @@ $("#returnTop_wrap").load("http://127.0.0.1/meilihui/public.html .returnTop",fun
 		})
 	})
 });
-$("#huodong_wrap").load("http://127.0.0.1/meilihui/public.html .huodong",function(){
+$("#huodong_wrap").load("public.html .huodong",function(){
 	$(".huo-dd").hover(function(){
 		$(this).find($(".huo-dd-zhe")).show();
 		$(this).find($(".huo-dd-zi")).show();
@@ -189,7 +189,7 @@ $("#huodong_wrap").load("http://127.0.0.1/meilihui/public.html .huodong",functio
 		$(".week5").html("周四");
 	}
 });
-$("#footer_wrap").load("http://127.0.0.1/meilihui/public.html .footer_advantage");
+$("#footer_wrap").load("public.html .footer_advantage");
 //图片公共特效
 $(".img-t").hover(function(){
 	$(this).find($(".img-zhe")).show();

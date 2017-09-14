@@ -88,6 +88,6 @@ $("#sign-btn").click(function(){
 		setCookie("username",$("#uname").val());
 		setCookie("userpwd",$("#upwd").val());
 		alert("恭喜您，注册成功！");
-		location.href="http://127.0.0.1/meilihui/login.html";
+		location.href="login.html";
 	}
 })

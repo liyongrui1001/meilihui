@@ -139,9 +139,9 @@ $(function(){
 	function jisuan(){
 		var pr=688-$(".car-price").html();
 		if(pr>0){
-			$(".car-cc").html(`再购<span class="car-ccs">${pr}</span>元立享满688元免运费	<a href="http://127.0.0.1/meilihui/list.html" style="text-decoration: underline;">去凑单&gt;</a>`);
+			$(".car-cc").html(`再购<span class="car-ccs">${pr}</span>元立享满688元免运费	<a href="list.html" style="text-decoration: underline;">去凑单&gt;</a>`);
 		}else{
-			$(".car-cc").html(`免运费&ensp;&ensp;<a href="http://127.0.0.1/meilihui/list.html">再逛逛&gt;</a>`);
+			$(".car-cc").html(`免运费&ensp;&ensp;<a href="list.html">再逛逛&gt;</a>`);
 		}
 	}
 	$(".car-bbjie").click(function(){
@@ -158,6 +158,6 @@ $(function(){
 			crr.push(bjson);
 		})
 		setCookie("shopli",JSON.stringify(crr));
-		location.href="http://127.0.0.1/meilihui/pay.html";
+		location.href="pay.html";
 	})
 })

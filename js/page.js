@@ -33,7 +33,7 @@
 			arr:[],
 			zhe:""
 		}
-		ajaxGet("http://127.0.0.1/meilihui/json/data.json",function(res){
+		ajaxGet("json/data.json",function(res){
 			var arr=JSON.parse(res).list;
 			for(var i in arr){
 				if(id==arr[i].id){
@@ -91,7 +91,7 @@
 				}
 				brr.push(ajson);
 				setCookie("shopli",JSON.stringify(brr));
-				location.href="http://127.0.0.1/meilihui/pay.html";
+				location.href="pay.html";
 			})
 			var st="";
 			$(".shop-gou").click(function(){
@@ -170,7 +170,7 @@
 	var id=arr.split("=")[1];
 	$.ajax({
 		type:"get",
-		url:"http://127.0.0.1/meilihui/json/data.json",
+		url:"json/data.json",
 		success:function(res){
 			var str="";
 			/*for(var i in res.list){
@@ -178,9 +178,9 @@
 					var ch=res.list[i];
 					var zhe=((ch.price/ch.yuan)*10).toFixed(1);
 					str=`<p class="shop-top">
-							<a href="http://127.0.0.1/meilihui/index.html">首页</a>&ensp;&gt;&ensp;
+							<a href="index.html">首页</a>&ensp;&gt;&ensp;
 							<a href="#">家居</a>&ensp;&gt;&ensp;
-							<a href="http://127.0.0.1/meilihui/list.html">LA CHANSON</a>&ensp;&gt;&ensp;
+							<a href="list.html">LA CHANSON</a>&ensp;&gt;&ensp;
 							<span class="shop-t">${ch.name}</span>
 						</p>
 						<div class="shop-main">
@@ -297,7 +297,7 @@
 				}
 				brr.push(ajson);
 				setCookie("shopli",JSON.stringify(brr));
-				location.href="http://127.0.0.1/meilihui/pay.html";
+				location.href="pay.html";
 			})
 			var st="";
 			$(".shop-gou").click(function(){
@@ -337,7 +337,7 @@
 				setCookie("shoplist",JSON.stringify(arr));
 				/*var f = confirm("是否继续购买?确定--继续购买，取消---去购物车结算");
 				if( !f ){
-					location.href = "http://127.0.0.1/meilihui/shopcar.html";
+					location.href = "shopcar.html";
 				}*/
 				/*st=`<div class="nav-cd">`;
 				
