@@ -69,43 +69,45 @@ $("#nav_wrap").load("public.html .nav", function() {
         $(".nav-car").html(st);
         $(".nav-rs").html(count);
         $(".nav-rp").html(sum);
-    }
-    $(".nav-carjie").click(function() {
-        var crr = [];
-        $(".nav-cdt").each(function() {
-            var bjson = {
-                id: $(this).parent().parent().find(".nav-s").eq($(this).index()).data("id"),
-                name: $(this).parent().parent().find(".nav-s").eq($(this).index()).data("name"),
-                src: $(this).parent().parent().find(".nav-s").eq($(this).index()).data("src"),
-                price: $(this).parent().parent().find(".nav-s").eq($(this).index()).data("price"),
-                color: $(this).parent().parent().find(".nav-s").eq($(this).index()).data("color"),
-                count: $(this).parent().parent().find(".nav-cdtrnum").eq($(this).index()).html()
-            }
-            crr.push(bjson);
+
+        $(".nav-carjie").click(function() {
+            var crr = [];
+            $(".nav-cdt").each(function() {
+                var bjson = {
+                    id: $(this).parent().parent().find(".nav-s").eq($(this).index()).data("id"),
+                    name: $(this).parent().parent().find(".nav-s").eq($(this).index()).data("name"),
+                    src: $(this).parent().parent().find(".nav-s").eq($(this).index()).data("src"),
+                    price: $(this).parent().parent().find(".nav-s").eq($(this).index()).data("price"),
+                    color: $(this).parent().parent().find(".nav-s").eq($(this).index()).data("color"),
+                    count: $(this).parent().parent().find(".nav-cdtrnum").eq($(this).index()).html()
+                }
+                crr.push(bjson);
+            })
+            localStorage.setItem("shopli", JSON.stringify(crr));
+            location.href = "pay.html";
         })
-        localStorage.setItem("shopli", JSON.stringify(crr));
-        location.href = "pay.html";
-    })
-    $(".nav-cshan").click(function() {
-        var c = confirm("确定要删除吗？")
-        if (c) {
-            $(this).parent().parent().remove();
-            var id = $(this).prev().data("id");
-            for (var i in _arr) {
-                if (id == _arr[i].id) {
-                    _arr.splice(i, 1);
-                    if (_arr.length == 0) {
-                        $(".nav-car").html(`<p class="nav-cp">购物袋暂无商品</p>`);
-                        $(".nav-rs").html(0);
-                        $(".nav-rp").html(0);
+        $(".nav-cshan").click(function() {
+            var c = confirm("确定要删除吗？")
+            if (c) {
+                $(this).parent().parent().remove();
+                var id = $(this).prev().data("id");
+                for (var i in _arr) {
+                    if (id == _arr[i].id) {
+                        _arr.splice(i, 1);
+                        if (_arr.length == 0) {
+                            $(".nav-car").html(`<p class="nav-cp">购物袋暂无商品</p>`);
+                            $(".nav-rs").html(0);
+                            $(".nav-rp").html(0);
+                        }
+                        $(".nav-rs").html(count);
+                        $(".nav-rp").html(sum);
+                        localStorage.setItem("shoplist", JSON.stringify(_arr));
                     }
-                    $(".nav-rs").html(count);
-                    $(".nav-rp").html(sum);
-                    localStorage.setItem("shoplist", JSON.stringify(_arr));
                 }
             }
-        }
-    })
+        })
+    }
+
     $(window).scroll(function() {
         var sTop = $(document).scrollTop();
         if (sTop < 120) {
