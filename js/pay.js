@@ -1,53 +1,65 @@
-var provArr=["河南省","上海市"];
-var cityArr=[["郑州市","濮阳市"],["浦东区","宝山区"]];
-var countryArr=[[["金水区","二七区"],["濮阳县","华龙区"]],[["高桥镇","陆家嘴街道"],["罗店镇","大场镇"]]];
-$(function(){
-	//地址三级联动
-	for(var i=0; i<provArr.length; i++){
-		$(".prov").append("<option value="+provArr[i]+"_"+i+">"+provArr[i]+"</option>");
-	}
-	$(".prov").change(function(){
-		$(".city")[0].length=1;
-		var str=$(this).val();
-		var index=str.split("_")[1];
-		if(str==""){
-			return;
-		}
-		var _cityArr=cityArr[index];
-		for(var i=0; i<_cityArr.length; i++){
-			$(".city").append("<option value="+_cityArr[i]+"_"+index+"_"+i+">"+_cityArr[i]+"</option>");
-		}
-	})
-	$(".city").change(function(){
-		$(".country")[0].length=1;
-		var str=$(this).val();
-		var provIndex=str.split("_")[1];
-		var cityIndex=str.split("_")[2];
-		if(str==""){
-			return;
-		}
-		var _countryArr=countryArr[provIndex][cityIndex];
-		for(var i=0; i<_countryArr.length; i++){
-			$(".country").append("<option value="+_countryArr[i]+">"+_countryArr[i]+"</option>");
-		}
-	})
-	$(".pay-ti").click(function(){
-		var prov=$(".prov").val().split("_")[0];
-		var city=$(".city").val().split("_")[0];
-		var country=$(".country").val();
-		var arr=[];
-		var _json={
-			"name":$(".name").val(),
-			"phone":$(".phone").val(),
-			"prov":prov,
-			"city":city,
-			"country":country,
-			"add":$(".add-xiang").val(),
-			"you":$(".add-you").val()
-		}
-		arr.push(_json);
-		setCookie("add",JSON.stringify(arr));
-		$(".add").html(`<div class="addres">
+var provArr = ["河南省", "上海市"];
+var cityArr = [
+    ["郑州市", "濮阳市"],
+    ["浦东区", "宝山区"]
+];
+var countryArr = [
+    [
+        ["金水区", "二七区"],
+        ["濮阳县", "华龙区"]
+    ],
+    [
+        ["高桥镇", "陆家嘴街道"],
+        ["罗店镇", "大场镇"]
+    ]
+];
+$(function() {
+    //地址三级联动
+    for (var i = 0; i < provArr.length; i++) {
+        $(".prov").append("<option value=" + provArr[i] + "_" + i + ">" + provArr[i] + "</option>");
+    }
+    $(".prov").change(function() {
+        $(".city")[0].length = 1;
+        var str = $(this).val();
+        var index = str.split("_")[1];
+        if (str == "") {
+            return;
+        }
+        var _cityArr = cityArr[index];
+        for (var i = 0; i < _cityArr.length; i++) {
+            $(".city").append("<option value=" + _cityArr[i] + "_" + index + "_" + i + ">" + _cityArr[i] + "</option>");
+        }
+    })
+    $(".city").change(function() {
+        $(".country")[0].length = 1;
+        var str = $(this).val();
+        var provIndex = str.split("_")[1];
+        var cityIndex = str.split("_")[2];
+        if (str == "") {
+            return;
+        }
+        var _countryArr = countryArr[provIndex][cityIndex];
+        for (var i = 0; i < _countryArr.length; i++) {
+            $(".country").append("<option value=" + _countryArr[i] + ">" + _countryArr[i] + "</option>");
+        }
+    })
+    $(".pay-ti").click(function() {
+        var prov = $(".prov").val().split("_")[0];
+        var city = $(".city").val().split("_")[0];
+        var country = $(".country").val();
+        var arr = [];
+        var _json = {
+            "name": $(".name").val(),
+            "phone": $(".phone").val(),
+            "prov": prov,
+            "city": city,
+            "country": country,
+            "add": $(".add-xiang").val(),
+            "you": $(".add-you").val()
+        }
+        arr.push(_json);
+        localStorage.setItem("add", JSON.stringify(arr));
+        $(".add").html(`<div class="addres">
 					<div class="add-top">
 						<p>默认地址</p>
 						<p><a>编辑</a><span>×</span></p>
@@ -58,12 +70,12 @@ $(function(){
 					<p style="text-align: right;"><input type="checkbox" checked /></p>
 				</div>
 				<span class="add-new">使用新地址</span>`);
-	})
-	
-	//判断地址是否已经设置过
-	var addArr=getCookie("add");
-	if(addArr.length!=0){
-		$(".add").html(`<div class="addres">
+    })
+
+    //判断地址是否已经设置过
+    var addArr = localStorage.getItem('add') ? JSON.parse(localStorage.getItem('add')) : [];
+    if (addArr.length != 0) {
+        $(".add").html(`<div class="addres">
 					<div class="add-top">
 						<p>默认地址</p>
 						<p><a>编辑</a><span>×</span></p>
@@ -74,13 +86,13 @@ $(function(){
 					<p style="text-align: right;"><input type="checkbox" checked /></p>
 				</div>
 				<span class="add-new">使用新地址</span>`);
-	}
-	
-	//加载购物清单
-	var arr=getCookie("shopli");
-	var str="";
-	for(var i in arr){
-		str+=`<div class="pay-shop">
+    }
+
+    //加载购物清单
+    var arr = localStorage.getItem('shopli') ? JSON.parse(localStorage.getItem('shopli')) : [];
+    var str = "";
+    for (var i in arr) {
+        str += `<div class="pay-shop">
 				<div class="pay-shopl">
 					<img src="images/${arr[i].src}" style="width: 60px; height: 80px;" />
 					<div class="pay-shoplr">
@@ -94,30 +106,30 @@ $(function(){
 				<p class="pay-shopy">0.00</p>
 				<p class="pay-shopx">${arr[i].count*arr[i].price}</p>
 			</div>`;
-	}
-	$(".pay-s").html(str);
-	var num="";
-	$(".pay-shopx").each(function(){
-		num=Number(num)+Number($(this).html());
-	})
-	$(".pay-num").html(num);
-	if(num>=688){
-		$(".pay-yun").html(0);
-	}
-	var sum=Number($(".pay-num").html())+Number($(".pay-yun").html());
-	$(".pay-sum").html(`￥${sum}.00`);
-	/*$.ajax({
-		type:"get",
-		url:"json/data.json",
-		success:function(res){
-		
-		}
-	});*/
-	$(".pay-btn").click(function(){
-		setCookie("money",JSON.stringify($(".pay-sum").html()));
-		location.href="payment.html";
-	})
-	var now=new Date();
-	var day=now.getDate();
-	$(".pay-date").html(day+3);
+    }
+    $(".pay-s").html(str);
+    var num = "";
+    $(".pay-shopx").each(function() {
+        num = Number(num) + Number($(this).html());
+    })
+    $(".pay-num").html(num);
+    if (num >= 688) {
+        $(".pay-yun").html(0);
+    }
+    var sum = Number($(".pay-num").html()) + Number($(".pay-yun").html());
+    $(".pay-sum").html(`￥${sum}.00`);
+    /*$.ajax({
+    	type:"get",
+    	url:"json/data.json",
+    	success:function(res){
+    	
+    	}
+    });*/
+    $(".pay-btn").click(function() {
+        localStorage.setItem("money", JSON.stringify($(".pay-sum").html()));
+        location.href = "payment.html";
+    })
+    var now = new Date();
+    var day = now.getDate();
+    $(".pay-date").html(day + 3);
 })
