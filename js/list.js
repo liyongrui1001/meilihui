@@ -40,41 +40,12 @@ window.onload=function(){
 //加载json数据
 $(function(){
 	lxfEndtime(); //倒计时
-	/*$.ajax({
-		type:"get",
-		url:"json/data.json",
-		success:function(res){
-			var html="";
-			for(var i in res){
-				for(var j in res[i]){
-					var ch=res[i][j];
-					html+=`<div class="shop-box">
-							<div class="shop-tui">买手推荐</div>
-							<a href="page.html?id=${ch.id}"><img src="images/${ch.src}"  class="shop-img" /></a>
-							<ul class="shop-small">
-								<li><img src="images/d${ch.src}"/></li>
-								<li><img src="images/e${ch.src}"/></li>
-								<li><img src="images/f${ch.src}"/></li>
-							</ul>
-							<div class="shop-b">
-								<p>LA CHANSON</p>
-								<p>${ch.name}</p>
-								<p>
-			                    	<span style="color: red;">￥${ch.price}</span>
-			                    	<span style="text-decoration: line-through; font-size:12px;">￥${ch.yuan}</span>
-			                    </p>
-							</div>
-						</div>`;
-				}
-			}
-			$(".list-main").html(html);
-		}
-	});*/
+	
 	//商品图片鼠标移入效果
 	$(".list-main").on("mouseenter","a",function(){
-		$(this).next().show();
+		$(this).find(".shop-small").show();
 	})
-	$(".list-main").on("mouseleave",$(".shop-box"),function(){
+	$(".list-main").on("mouseleave","a",function(){
 		$(this).find($(".shop-small")).hide();
 	})
 	$(".list-main").on("mouseenter","li",function(){
