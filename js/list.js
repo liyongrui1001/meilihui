@@ -42,15 +42,16 @@ $(function(){
 	lxfEndtime(); //倒计时
 	
 	//商品图片鼠标移入效果
-	$(".list-main").on("mouseenter","a",function(){
-		$(this).find(".shop-small").show();
-	})
-	$(".list-main").on("mouseleave","a",function(){
-		$(this).find($(".shop-small")).hide();
-	})
-	$(".list-main").on("mouseenter","li",function(){
-		var src=$(this).find("img").attr("src")
-		$(this).parent().prev().find("img").attr("src",src);
-		$(this).parent().prev().find("img").css({"width":235,"height":313})
-	})
+	$(".list-main").on("mouseenter", "a", function() {
+        $(this).find(".shop-small").show();
+    })
+    $(".list-main").on("mouseleave", "a", function() {
+        $(this).find(".shop-small").hide();
+    })
+
+    $(".list-main").on("mouseenter", "li", function() {
+        var src = $(this).find("img").attr("src")
+        $(this).parent().prev().attr("src", src);
+        $(this).parent().prev().css({ "width": 235, "height": 313 })
+    })
 })

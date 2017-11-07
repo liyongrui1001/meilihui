@@ -147,28 +147,6 @@
 						</div>`;
 	                count = Number(count) + Number(arr[i].count);
 	                sum = Number(sum + arr[i].count * arr[i].price);
-
-
-	                $(".nav-cshan").click(function() {
-	                    var c = confirm("确定要删除吗？")
-	                    if (c) {
-	                        $(this).parent().parent().remove();
-	                        var id = $(this).prev().data("id");
-	                        for (var i in _arr) {
-	                            if (id == _arr[i].id) {
-	                                _arr.splice(i, 1);
-	                                if (_arr.length == 0) {
-	                                    $(".nav-car").html(`<p class="nav-cp">购物袋暂无商品</p>`);
-	                                    $(".nav-rs").html(0);
-	                                    $(".nav-rp").html(0);
-	                                }
-	                                $(".nav-rs").html(count);
-	                                $(".nav-rp").html(sum);
-	                                localStorage.setItem("shoplist", JSON.stringify(_arr));
-	                            }
-	                        }
-	                    }
-	                })
 	            }
 	            st += `<p class="nav-cdc">购物袋小计：￥<span class="nav-carsum">${sum}</span></p>
 						<div class="nav-cdd">
@@ -180,6 +158,7 @@
 	            $(".nav-rp").html(sum);
 	            $(".nav-car").show();
 
+				var _arr = localStorage.getItem('shoplist') ? JSON.parse(localStorage.getItem('shoplist')) : [];
 	            $(".nav-carjie").click(function() {
 	                var crr = [];
 	                $(".nav-cdt").each(function() {
@@ -195,7 +174,29 @@
 	                })
 	                localStorage.setItem("shopli", JSON.stringify(crr));
 	                location.href = "pay.html";
-	            })
+				})
+				$(".nav-cshan").click(function() {
+					
+					var c = confirm("确定要删除吗？")
+					if (c) {
+						$(this).parent().parent().remove();
+						var id = $(this).prev().data("id");
+						$(".nav-rs").html(count);
+						$(".nav-rp").html(sum);
+	
+						for (var i in _arr) {
+							if (id == _arr[i].id) {
+								_arr.splice(i, 1);
+								if (_arr.length == 0) {
+									$(".nav-car").html(`<p class="nav-cp">购物袋暂无商品</p>`);
+									$(".nav-rs").html(0);
+									$(".nav-rp").html(0);
+								}
+								localStorage.setItem("shoplist", JSON.stringify(_arr));
+							}
+						}
+					}
+				})
 	        })
 	    })
 	}
